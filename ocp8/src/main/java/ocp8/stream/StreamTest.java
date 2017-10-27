@@ -1,16 +1,19 @@
-package ocp8.functional;
+package ocp8.stream;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class Functional {
+public class StreamTest {
 
 	public static void main(String[] args) {
 		
@@ -25,6 +28,8 @@ public class Functional {
 		
 		/* Parallel reduction */
 		test4();
+		
+		//System.out.println(test6(new int[]{1,2}, 3));
 		
 	}
 	
@@ -71,6 +76,20 @@ public class Functional {
 		.forEach(c -> service.submit( // b2
 		() -> System.out.println(10*c))); // b3
 		service.execute(() -> System.out.println("Printed")); // b4
+	}
+	
+	static int[] test6(int l, int r) {
+		List<Integer> resultList = new ArrayList<>();
+		
+		for (int i=l;i<=r;i++) {
+			if (i%2==1) {
+				resultList.add(i);
+			}
+		}
+		
+		
+		return resultList.stream().mapToInt(x->x).toArray();
+		
 	}
 
 }
